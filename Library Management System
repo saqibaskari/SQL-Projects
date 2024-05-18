@@ -25,3 +25,21 @@ CREATE TABLE Loans (
     FOREIGN KEY (borrower_id) REFERENCES Borrowers(borrower_id)
 );
 
+-- Find all books by a specific author
+SELECT b.title 
+FROM Books b
+JOIN Authors a ON b.author_id = a.author_id
+WHERE a.name = 'Author Name';
+
+-- Find all borrowed books and their due dates
+SELECT b.title, l.return_date 
+FROM Loans l
+JOIN Books b ON l.book_id = b.book_id
+WHERE l.return_date IS NOT NULL;
+
+-- Find all borrowers with overdue books
+SELECT br.name 
+FROM Borrowers br
+JOIN Loans l ON br.borrower_id = l.borrower_id
+WHERE l.return_date < CURRENT_DATE;
+
