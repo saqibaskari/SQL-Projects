@@ -1,1 +1,27 @@
+CREATE TABLE Authors (
+    author_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    author_id INT,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+);
+
+CREATE TABLE Borrowers (
+    borrower_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Loans (
+    loan_id SERIAL PRIMARY KEY,
+    book_id INT,
+    borrower_id INT,
+    loan_date DATE,
+    return_date DATE,
+    FOREIGN KEY (book_id) REFERENCES Books(book_id),
+    FOREIGN KEY (borrower_id) REFERENCES Borrowers(borrower_id)
+);
 
